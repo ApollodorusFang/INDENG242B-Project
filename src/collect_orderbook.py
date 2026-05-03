@@ -46,8 +46,16 @@ else:
     )
 
 
-BINANCE_WS = "wss://stream.binance.com:9443/ws/{stream}"
-BINANCE_REST_DEPTH = "https://api.binance.com/api/v3/depth"
+EXCHANGES = {
+    "binance": {
+        "ws": "wss://stream.binance.com:9443/ws/{stream}",
+        "rest": "https://api.binance.com/api/v3/depth",
+    },
+    "binance-us": {
+        "ws": "wss://stream.binance.us:9443/ws/{stream}",
+        "rest": "https://api.binance.us/api/v3/depth",
+    },
+}
 
 
 class OrderBookCollector:
@@ -60,7 +68,13 @@ class OrderBookCollector:
         chunk_path: str,
         chunk_size: int,
         log_path: Optional[str] = None,
+        exchange: str = "binance-us",
     ) -> None:
+        if exchange not in EXCHANGES:
+            raise ValueError(f"unknown exchange: {exchange}; choose from {list(EXCHANGES)}")
+        self.exchange = exchange
+        self.ws_url_tpl = EXCHANGES[exchange]["ws"]
+        self.rest_url = EXCHANGES[exchange]["rest"]
         self.symbol = symbol.lower()
         self.duration_seconds = duration_seconds
         self.sample_interval_ms = int(sample_interval_seconds * 1000)
@@ -95,7 +109,8 @@ class OrderBookCollector:
         self._rest_warmup()
         self.start_wall = time.time()
         self.logger.info(
-            "starting collection: symbol=%s duration=%ds sample_every=%dms top=%d",
+            "starting collection: exchange=%s symbol=%s duration=%ds sample_every=%dms top=%d",
+            self.exchange,
             self.symbol.upper(),
             self.duration_seconds,
             self.sample_interval_ms,
@@ -132,7 +147,7 @@ class OrderBookCollector:
         """Sanity-check connectivity with a REST depth snapshot before opening WS."""
         try:
             r = requests.get(
-                BINANCE_REST_DEPTH,
+                self.rest_url,
                 params={"symbol": self.symbol.upper(), "limit": 20},
                 timeout=10,
             )
@@ -151,7 +166,7 @@ class OrderBookCollector:
 
     def _run_once(self) -> None:
         stream = f"{self.symbol}@depth{DEPTH}@100ms"
-        url = BINANCE_WS.format(stream=stream)
+        url = self.ws_url_tpl.format(stream=stream)
         ws = websocket.create_connection(url, timeout=30)
         ws.settimeout(30)
         self.logger.info("ws connected: %s", url)
@@ -288,6 +303,12 @@ class OrderBookCollector:
 
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Collect BTCUSDT top-20 LOB snapshots.")
+    p.add_argument(
+        "--exchange",
+        default="binance-us",
+        choices=list(EXCHANGES),
+        help="Exchange WebSocket source (default: binance-us, since binance.com is geo-restricted in the US).",
+    )
     p.add_argument("--symbol", default="BTCUSDT")
     p.add_argument(
         "--duration-hours",
@@ -335,6 +356,7 @@ def main() -> None:
         chunk_path=args.chunk_dir,
         chunk_size=args.chunk_size,
         log_path=args.log_file,
+        exchange=args.exchange,
     )
     collector.run()
 
