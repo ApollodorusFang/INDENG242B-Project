@@ -1,10 +1,9 @@
 # INDENG 242B — Crypto LOB replication package
 
 Reuses the BTCUSDT order-book dataset built by `src/build_dataset.py` and
-applies the model families from **ESE 5460 EC** (oil-price prediction) plus
-the backtesting / evaluation toolkit from **INDENG 231 Project 1** (Nasdaq-100
-strategy backtest) so each model is judged by both standard regression
-metrics and a realistic high-frequency PnL simulation.
+runs a sweep of sequence-model families (TS / RF / LSTM / RNN / GRU+Attn /
+CNN-LSTM) plus a high-frequency backtester so each model is judged by both
+standard regression metrics and a realistic PnL simulation.
 
 ## Pipeline
 
@@ -30,7 +29,7 @@ replication/models/
      ▼
 replication/evaluation/
    ├── regression.py   RMSE / MAE / R² / directional accuracy / F1 / AUC
-   ├── backtest.py     INDENG-231-style engine (Sharpe, MaxDD, Calmar, …)
+   ├── backtest.py     PnL engine (Sharpe, MaxDD, Calmar, …)
    └── aggregator.py   merged CSV + NAV / drawdown / scatter plots
      │
      ▼
@@ -47,7 +46,7 @@ cd "INDENG 242B/INDENG242B-Project"
 # Smoke / fast preset (default): small grids, few epochs, runs in ~5–15 min on RTX 5090
 python -m replication.main
 
-# Full preset: larger grids, longer training, closer to the ESE 5460 EC sweep
+# Full preset: larger grids, longer training
 GRID_PRESET=full python -m replication.main
 ```
 
@@ -72,10 +71,9 @@ python -m src.build_dataset \
   which for 1 Hz × 10 s ≈ 3.15 M periods.
 * **Buy-and-hold** — included as a benchmark row.
 
-The 231 backtester’s per-strategy comparison table (Cumulative Return,
-Annualized Return, Volatility, Sharpe, Sortino, Max Drawdown, Calmar,
-Win Rate, Avg Turnover) maps 1:1 to the columns in
-`replication/results/_backtest_metrics.csv`.
+The per-strategy comparison table (Cumulative Return, Annualized Return,
+Volatility, Sharpe, Sortino, Max Drawdown, Calmar, Win Rate, Avg Turnover)
+is written to `replication/results/_backtest_metrics.csv`.
 
 ## Outputs
 

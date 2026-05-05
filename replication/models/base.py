@@ -1,7 +1,6 @@
 """Shared training / grid-search / ensemble plumbing for sequence models.
 
-Every model family writes the four-file result schema used by the ESE 5460 EC
-``Model Comparison`` notebook:
+Every model family writes the same four-file result schema:
 
 * ``<prefix>_grid_search_results.csv``
 * ``<prefix>_top10_model_metrics.csv``

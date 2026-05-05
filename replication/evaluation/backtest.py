@@ -1,4 +1,4 @@
-"""High-frequency backtester for BTCUSDT, structurally aligned with INDENG 231.
+"""High-frequency backtester for BTCUSDT.
 
 Each test sample ``i`` carries:
   * ``ts_i``           — server timestamp at decision time
@@ -20,8 +20,8 @@ Net per-bet log-return is ``pos * realized``. Transaction cost
 ``cost_bps`` is charged on changes in position (turnover ``|pos_t - pos_{t-1}|``,
 0..2 per flip), expressed in arithmetic returns.
 
-Outputs the same summary columns as INDENG 231's ``compute_metrics``
-(Cumulative Return, Sharpe, Sortino, Max Drawdown, Calmar, Win Rate, etc.).
+Outputs a standard summary (Cumulative Return, Sharpe, Sortino, Max Drawdown,
+Calmar, Win Rate, etc.).
 """
 from __future__ import annotations
 

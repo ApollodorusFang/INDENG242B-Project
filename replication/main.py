@@ -6,7 +6,7 @@ Pipeline
 2. Run six model families (Time Series, Random Forest, LSTM, RNN, GRU+Attn,
    CNN-LSTM); each writes the four-file result schema.
 3. Compute traditional regression + directional metrics.
-4. Run the high-frequency backtester with INDENG-231-style metrics.
+4. Run the high-frequency backtester (Sharpe / Sortino / MaxDD / Calmar / …).
 5. Produce combined comparison tables + NAV / drawdown / scatter plots.
 
 Usage
@@ -16,7 +16,7 @@ Usage
     GRID_PRESET=full python -m replication.main
 
 The "fast" preset shrinks each grid so the whole pipeline finishes in a few
-minutes on an RTX 5090; "full" expands grids closer to the ESE 5460 EC sweep.
+minutes on an RTX 5090; "full" expands the grids for a more thorough sweep.
 """
 from __future__ import annotations
 
