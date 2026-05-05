@@ -1,8 +1,7 @@
-"""Stacked LSTM (PyTorch port of the ESE 5460 EC Keras LSTM family).
+"""Stacked LSTM regressor.
 
 Predicts the regression label (10-step log return of mid_price) from a window
-of 60 LOB feature vectors. The grid search and top-10 ensemble pipeline
-mirrors ``LSTM Modeling.py`` from ESE 5460 EC.
+of 60 LOB feature vectors using a grid search + top-10 ensemble pipeline.
 """
 from __future__ import annotations
 

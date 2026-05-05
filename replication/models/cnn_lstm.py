@@ -1,4 +1,4 @@
-"""1D causal CNN + LSTM (port of ESE 5460 EC Pytorch NN Modeling)."""
+"""1D causal CNN feeding into an LSTM regressor."""
 from __future__ import annotations
 
 import torch

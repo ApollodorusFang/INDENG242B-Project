@@ -1,9 +1,8 @@
 """Random Forest regressor on flattened LOB windows.
 
-Mirrors the ESE 5460 EC ``Random Forest Modeling`` pipeline: small grid
-search over n_estimators / max_depth / min_samples_leaf, top-K models by
-val MSE, equal-weighted ensemble on the test set, write the unified four
-result CSVs.
+Small grid search over n_estimators / max_depth / min_samples_leaf, top-K
+models by val MSE, equal-weighted ensemble on the test set, written to the
+unified four-CSV result schema.
 """
 from __future__ import annotations
 

@@ -1,4 +1,4 @@
-"""GRU + Bahdanau-style attention (port of ESE 5460 EC Pytorch NN Modeling)."""
+"""GRU + Bahdanau-style attention regressor."""
 from __future__ import annotations
 
 import torch

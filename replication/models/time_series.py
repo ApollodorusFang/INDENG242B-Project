@@ -1,7 +1,6 @@
 """Classical time-series baselines (AR / ARMA / ARIMA on log mid-price returns).
 
-Mirrors the spirit of ESE 5460 EC's ``Time Series Modeling`` notebook, but
-adapted to the high-frequency LOB data and tuned for tractable runtime:
+Adapted to the high-frequency LOB data and tuned for tractable runtime:
 
 * Each candidate model is fit *once* on the train portion of the 1-step
   log-return series of mid_price.

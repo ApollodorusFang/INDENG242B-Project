@@ -1,7 +1,7 @@
 """Shared configuration for the replication package.
 
 Edit ``GRID_PRESET`` to switch between fast smoke-test grids and the full
-grids that mirror the ESE 5460 EC search spaces.
+search spaces.
 """
 from __future__ import annotations
 
@@ -35,14 +35,14 @@ SECONDS_PER_YEAR = 365.25 * 24 * 3600
 PERIODS_PER_YEAR = SECONDS_PER_YEAR / (SAMPLE_INTERVAL_S * HORIZON_STEPS)
 
 # Trading parameters used by the backtester. ``COST_BPS`` is per-side in bps.
-# At 1 Hz / 10 s horizon, |log return| std is ~2e-4; INDENG 231's daily-style
-# 2 bps would dominate the signal. We use a HF-realistic 1 bp default and
-# also report a frictionless backtest for separating model alpha from costs.
+# At 1 Hz / 10 s horizon, |log return| std is ~2e-4, so a daily-style 2 bps
+# would dominate the signal. We use a HF-realistic 1 bp default and also
+# report a frictionless backtest for separating model alpha from costs.
 COST_BPS = 1.0
 SIGNAL_THRESHOLD = 5e-5  # matches the 3-class label threshold
 
-# Top-K used by the ensemble (matches ESE 5460 EC convention).
+# Top-K used by the ensemble.
 TOP_K = 10
 
-# Toggle this to "fast" for quick iteration; "full" to match ESE 5460 EC grids.
+# Toggle this to "fast" for quick iteration; "full" for the larger sweep.
 GRID_PRESET = os.environ.get("GRID_PRESET", "fast").lower()

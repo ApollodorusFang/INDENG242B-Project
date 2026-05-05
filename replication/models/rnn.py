@@ -1,4 +1,4 @@
-"""Stacked Elman RNN (PyTorch port of the ESE 5460 EC Keras SimpleRNN family)."""
+"""Stacked Elman RNN regressor."""
 from __future__ import annotations
 
 import torch.nn as nn
