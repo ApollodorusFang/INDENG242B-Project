@@ -1,0 +1,4 @@
+outputs/logs/
+outputs/tables/
+__pycache__/
+*.pyc
