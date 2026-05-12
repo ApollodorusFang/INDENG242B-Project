@@ -52,7 +52,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-REPO_URL = "https://github.com/ApollodorusFang/INDENG242B-Project"
+REPO_URL = "https://github.com/242B-group/INDENG242B-Project"
 
 # ---------------------------------------------------------------------------
 # Sidebar — global navigation + project info
@@ -517,7 +517,7 @@ def page_about():
         **Repository:** [{REPO_URL}]({REPO_URL})
 
         ### What this dashboard is
-        An interactive companion to our [final report](https://github.com/ApollodorusFang/INDENG242B-Project).
+        An interactive companion to our [final report](https://github.com/242B-group/INDENG242B-Project).
         Page 4 (**Backtest Sandbox**) is the meaningful-interaction component
         from the project rubric: it lets anyone — without reading our code —
         verify how every model's PnL responds to the two parameters that
