@@ -46,10 +46,13 @@ report and a synthetic demo panel if nothing is committed.
 1. Push this branch to GitHub.
 2. Go to <https://share.streamlit.io>, sign in with GitHub, click
    **New app**.
-3. Repository: `ApollodorusFang/INDENG242B-Project` · Branch: `main` ·
+3. Repository: `242B-group/INDENG242B-Project` · Branch: `main` ·
    Main file path: `streamlit_app.py`.
 4. Click **Deploy**. First build takes ~2 minutes; subsequent pushes
    redeploy automatically.
 
 The free tier (1 GB RAM, sleeps after inactivity) is plenty for this app —
 it only reads small CSVs and runs the backtest in NumPy.
+
+## Live deployment
+<https://indeng242b-project.streamlit.app>

@@ -41,7 +41,7 @@ replication/outputs/logs    (replication.log)
 ## Run
 
 ```bash
-cd "INDENG 242B/INDENG242B-Project"
+cd INDENG242B-Project
 
 # Smoke / fast preset (default): small grids, few epochs, runs in ~5–15 min on RTX 5090
 python -m replication.main

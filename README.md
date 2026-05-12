@@ -12,7 +12,7 @@ similar in spirit to FI-2010.
 ## 1. Install
 
 ```bash
-cd crypto_lob_dataset
+cd INDENG242B-Project
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 ```
